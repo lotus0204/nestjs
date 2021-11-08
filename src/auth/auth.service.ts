@@ -23,7 +23,7 @@ export class AuthService {
 
     if (user && (await bcrypt.compare(password, user.password))) {
       const payload = { username };
-      const accessToken = this.jwtService.sign(payload);
+      const accessToken = this.jwtService.sign(payload); //이 부분에서 secret값을 어떻게 합쳐서 넣는지 잘 모르겠어
 
       return { accessToken };
     }

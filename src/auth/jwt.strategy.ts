@@ -12,7 +12,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
         @InjectRepository(UserRepository)
         private userRepository: UserRepository
     ) {
-        super({
+        super({//토큰이 유효한지 체크하는 부분
             secretOrKey: 'Secret1234',
             jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken()
         })
