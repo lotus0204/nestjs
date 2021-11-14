@@ -1,10 +1,12 @@
-import { Body, Controller, Delete, Get, Param, Post, Patch, UsePipes, ValidationPipe, NotFoundException, ParseIntPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Patch, UsePipes, ValidationPipe, NotFoundException, ParseIntPipe, UseGuards } from '@nestjs/common';
 import { BoardStatus } from './board-status.enum';
 import { BoardsService } from './boards.service';
 import { CreateBoardDto } from './dto/create-board.dto';
 import { Board } from './board.entity';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('boards')//boards라는 경로야
+@UseGuards(AuthGuard())//컨트롤러 레벨로 주었기 때문에, 모든 핸들러가 다 영향을 받는다.
 export class BoardsController {
   constructor(private boardsService: BoardsService) { }
   
