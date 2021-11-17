@@ -15,8 +15,8 @@ export class BoardsService {
     private boardRepository: BoardRepository
   ){}
   //각각의 것들은 메소드라고 부른다.
-  async getAllBoards(): Promise<Board[]> {
-    return await this.boardRepository.find();
+  async getAllBoards(user): Promise<Board[]> {
+    return await this.boardRepository.find({ where: { userId: user.id } });
   }
 
   createBoard(createBoardDto: CreateBoardDto, user:User): Promise<Board>{
@@ -38,18 +38,11 @@ export class BoardsService {
     if (!found) throw new NotFoundException(`Can't find board with ${id}`);
     return found;
   }
-  async deleteBoard(id: number): Promise<void>{
-    const result = await this.boardRepository.delete(id);
+  async deleteBoard(id: number, user:User): Promise<void>{
+    const result = await this.boardRepository.delete({id,  user });
     if (result.affected === 0) throw new NotFoundException(`Can't find board with ${id}`);
   }
-  // getBoardById(id: string): Board {
-  //   return this.boards.find((boards) => boards.id === id);
-  // }
-  // //void 함수가 아무것도 반환하지 않는다는 뜻, 즉 반환하는 값이 없는 함수의 타입
-  // deleteBoard(id: string): void {
-  //   const found = this.getBoardById(id);
-  //   this.boards = this.boards.filter((boards) => boards.id !== found.id);
-  // }
+  
   async updateBoardStatus(id: number, status: BoardStatus): Promise<Board>{
     const board = await this.getBoardById(id);
     board.status = status;
