@@ -12,6 +12,8 @@ import { BoardsService } from './boards.service';
     AuthModule
   ],
   controllers: [BoardsController],
-  providers: [BoardsService]
+  providers: [BoardsService]//프로바이더의 주요 아이디어는 종속성을 주입한다는 것이다. 
+  // 객체는 서로 다양한 관계를 만들 수 있으며 객체의 인스턴스를 "연결"하는 기능은 대부분 Nest 런타임 시스템에 위임될 수 있습니다.
+//더 복잡한 작업을 컨트롤러가 프로바이더(예를들어 서비스)에게 위임한다. 
 })
 export class BoardsModule {}
