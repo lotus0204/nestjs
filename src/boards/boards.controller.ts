@@ -23,7 +23,7 @@ export class BoardsController {
   }
 
   @Post()
-  @UsePipes(ValidationPipe)
+  @UsePipes(ValidationPipe)//파이프는 유효성검사와 변환이 있는데 여기서는 유효성을 검사하여 보드를 생성할 떄 검사를 하는 것이다.
   createBoard(
     @Body() createBoardDto: CreateBoardDto,
     @GetUser() user:User): Promise<Board> {

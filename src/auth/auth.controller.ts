@@ -21,7 +21,7 @@ export class AuthController {
 
   //이부분 전반적인 흐름이 잘 이해가 안된다.
   @Post('/test')
-  @UseGuards(AuthGuard())
+  @UseGuards(AuthGuard())//이걸 컨트롤러 단으로 옮기면 모든 크 컨트롤러전체에서 영향을 받는다
   test(@GetUser() user: User) {
     console.log('user', user);
   }
